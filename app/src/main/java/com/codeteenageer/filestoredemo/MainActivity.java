@@ -2,6 +2,9 @@ package com.codeteenageer.filestoredemo;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.TextView;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -13,11 +16,23 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 
 public class MainActivity extends AppCompatActivity {
+    private EditText et;
+    private TextView tv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        et = (EditText) findViewById(R.id.et);
+        tv = (TextView) findViewById(R.id.tv);
+    }
+
+    public void save(View view) {
+        save(et.getText().toString());
+    }
+
+    public void get(View view) {
+        tv.setText(getData());
     }
 
     private void save(String data) {
@@ -41,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private String select() {
+    private String getData() {
         FileInputStream in = null;
         BufferedReader reader = null;
         StringBuilder content = new StringBuilder();
